@@ -36,8 +36,8 @@
                         </p>
                         <p class="form-group">
                             <label for="">Gender </label><br>
-                            <input type="radio" class ="gender" name="gender" id="" value="male" autofocus  <?php genderMale(); ?>  >Male<br>
-                            <input type="radio" name="gender" class ="gender" id="" value = "female" autofocus  <?php genderFemale(); ?>>Female<br>
+                            <input type="Checkbox" class ="gender" name="gender" onclick="malecheck()" id="male" value="male" autofocus  <?php genderMale(); ?>  >Male<br>
+                            <input type="checkbox" name="gender" class ="gender" id="female" onclick="femalecheck()" value = "female" autofocus  <?php genderFemale(); ?>>Female<br>
                             <?php gender(); ?> 
                                                   
                         </p>
@@ -66,6 +66,7 @@
                         <p class="form-group">
                             <input type="submit" value="submit" class="btn btn-primary" >
                         </p>
+                        <script src="script.js"></script>
               </form>
           </div>
       </div>
