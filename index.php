@@ -59,7 +59,7 @@
                         </p>
                         <p class="form-group">
                             <Label>Date Of Birth</Label><br>
-                            <input type="date" name="DOB" placeholder="" class="form-control" autofocus <?php dateValue(); ?>>
+                            <input type="date" name="DOB" placeholder="" id= "date" class="form-control" autofocus <?php dateValue(); ?>>
                              <?php DOB(); ?> 
                         </p>
                         

@@ -88,7 +88,22 @@
             }
             else{
                   $DOB = test_input($_POST["DOB"]);
-                  $_SESSION["date_value"] = $DOB;  
+                  $date = date_create($DOB);
+                  $laterdate = date_format($date, "Y/m/d");
+                  $checkdate = date_create(date("Y/m/d"));
+                  $checkdateformat = date_format($checkdate, "Y/m/d");
+                  
+                  
+                  $diff = date_diff($checkdate, $date) -> format("%r%a");
+                 
+                  if($diff > 0){
+                        $_SESSION["dob"] = "Invalid, date of birth should not be a later day";
+                        $count++; 
+                  }
+                  else{
+                        $_SESSION["date_value"] = $DOB; 
+                  }
+                  
             }
 
             
@@ -142,11 +157,12 @@
                 
                 echo "<div style= 'margin:5em;'>";
                 echo "SUCCESS<br>";
-                echo $firstName." ".$lastName."<br>";
-                echo $email."<br>";
-                echo $department."<br>";
-                echo $gender."<br>";
-                echo $colour."<br>";
+                echo "NAME: ".$firstName." ".$lastName."<br>";
+                echo "EMAIL: ".$email."<br>";
+                echo "DEPARTMENT: ".$department."<br>";
+                echo "GENDER: ".$gender."<br>";
+                echo "COLOR: ".$colour."<br>";
+                echo "DATE-OF-BIRTH: ".$DOB."<br><br>";
                 echo "<button class='btn btn-primary'> <a href='exit.php' style='color:white;'>EXIT</a></button>";
                 echo "</div>";
                 
