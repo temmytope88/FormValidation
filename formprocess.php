@@ -26,13 +26,13 @@
                   $_SESSION["lastName"] = "Last Name is required";
                   $count++;
             }
-           /* else{
+            else{
                   $lasttName = test_input($_POST["lastName"]);
-                  if  (!preg_match("/[a-zA-Z]/", $lastName)){
+                  if  (!preg_match("/^[A-Z][A-Za-z]*/", $lastName)){
                         $_SESSION["lastname"] = "Invalid Last Name";
                         $count++;
                   }
-            }*/
+            }
 
 
             if(empty($_POST["email"])){
@@ -52,17 +52,14 @@
                   $_SESSION["password"]= "Password is required";
                   $count++;
             }
-            else if (strlen($_POST["password"]) < 15){
-                  $_SESSION["password"]= "Minimum length required is 15";
-                  $count++;   
-            }
-           /* else{
+            else {
                   $password = test_input($_POST["password"]);
-                  if  (!preg_match("/[a-zA-Z]/", $firstName)){
-                        $_SESSION["password"] = "Password is not Strong strong";
-                        $count++;
+
+                  if(!preg_match ("/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()+=_'?>.,;:}[}\<|]).{11,26}$/", $password)){
+                        $_SESSION["password"]= "Password is weak, it should include at least one uppercase, one lowercase, one number and special characters (!@#$%^&*(?>)<+_=-)";
+                        $count++;  
                   }
-            }*/
+            }     
 
 
             if(empty($_POST["department"])){
