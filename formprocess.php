@@ -19,6 +19,9 @@
                         $_SESSION["firstName"] = "Invalid First Name";
                         $count++;
                   }
+                  else{
+                        $_SESSION["firstname_value"] = $firstName;
+                  }
             }
 
 
@@ -27,10 +30,14 @@
                   $count++;
             }
             else{
-                  $lasttName = test_input($_POST["lastName"]);
+                  $lastName = test_input($_POST["lastName"]);
+
                   if  (!preg_match("/^[A-Z][A-Za-z]*/", $lastName)){
                         $_SESSION["lastname"] = "Invalid Last Name";
                         $count++;
+                  }
+                  else{
+                        $_SESSION["lastname_value"] = $lastName;
                   }
             }
 
@@ -44,6 +51,9 @@
                   if  (!filter_var($email, FILTER_VALIDATE_EMAIL)){
                         $_SESSION["email"] = "Invalid Email format";
                         $count++;
+                  }
+                  else{
+                        $_SESSION["email_value"] = $email;
                   }
             }
 
@@ -66,54 +76,85 @@
                   $_SESSION["department"] = "Department is required";
                   $count++;
             }
-            /*else{
+            else{
                   $department = test_input($_POST["department"]);
-                  
-            }*/
+                  $_SESSION["department_value"] = $department;        
+            }
 
             
             if(empty($_POST["DOB"])){
                   $_SESSION["dob"] = "Date of Birth is required";
                   $count++;
             }
-            /*else{
+            else{
                   $DOB = test_input($_POST["DOB"]);
-            }*/
+                  $_SESSION["date_value"] = $DOB;  
+            }
 
             
             if(empty($_POST["color"])){
                   $_SESSION["color"] = "Favourite Color is required";
                   $count++;
             }
-            /*else{
+            else{
                   $colour = test_input($_POST["color"]);
-                  if  (!preg_match("/[a-zA-Z]/", $colour)){
-                        $_SESSION["color"] = "Invalid First Name";
+                  if  (!preg_match("/^[A-Za-z]*/", $colour)){
+                        $_SESSION["color"] = "Invalid Color";
                         $count++;
                   }
-            }*/
+                  else {
+                        $gender = test_input($_POST["gender"]);   
+                        $_SESSION["color_value"] = $colour;              
+                  }
+                    
+            }
 
-             if(empty($_POST["gender"])){
+            if(empty($_POST["gender"])){
                   $_SESSION["gender"] = "Gender is required";
                   $count++;
             }
-            /*else {
-                  $gender = test_input($_POST["firstName"]);
-                 
-                  }*/
+            else {
+                  $gender = test_input($_POST["gender"]);   
+                  $_SESSION["gender_value"] = $gender;              
+            }
                        
             
         function test_input($data) {
          $data = trim($data);
-         $data  = stripcslashes($data);
+         $data = stripcslashes($data);
          $data = htmlspecialchars ($data);
          return $data;    
        }
 
+         // check  for any error in the users input
           if ($count > 0){
-                $_SESSION["error"] = "error".$count;
                 header("location:index.php");
           }
+
+          else{
+                include("Sessions/header.php");
+                if (strtolower($colour) == "white" || strtolower($colour) == "pink" || strtolower($colour) == "grey" || strtolower($colour) == "gray"|| strtolower($colour) == "yellow" ){
+                  echo "<body style='color:black; background:".$colour."'>";    
+                }
+                else{
+                  echo "<body style='color:white; background:".$colour."'>";
+                }
+                
+                echo "<div style= 'margin:5em;'>";
+                echo "SUCCESS<br>";
+                echo $firstName." ".$lastName."<br>";
+                echo $email."<br>";
+                echo $department."<br>";
+                echo $gender."<br>";
+                echo $colour."<br>";
+                echo "<button class='btn btn-primary'> <a href='exit.php' style='color:white;'>EXIT</a></button>";
+                echo "</div>";
+                
+                include("Sessions/footer.php");
+                
+          }
+
+          
 
         
        ?>
